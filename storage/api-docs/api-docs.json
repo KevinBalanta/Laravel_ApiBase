@@ -1,0 +1,176 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Ceniprof",
+        "description": "Servicio que permite consultar y ejecutar procesos de fabrica",
+        "contact": {
+            "name": "SETI",
+            "email": "meteorlogia@cenicana.org"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/API/api_base/public/api"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Login",
+                "description": "Genera el token de autenticación",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "E-Mail",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "El login se realizó correctamente "
+                    },
+                    "400": {
+                        "description": "Petición no valida"
+                    },
+                    "401": {
+                        "description": "Usuario no autorizado"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Logout",
+                "description": "Invalida el token",
+                "operationId": "logout",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "El login se realizó correctamente "
+                    },
+                    "400": {
+                        "description": "Petición no valida"
+                    },
+                    "401": {
+                        "description": "Usuario no autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Refresca el token de autenticación",
+                "description": "Invalida el token actual y genera uno nuevo",
+                "operationId": "refresh",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "El login se realizó correctamente "
+                    },
+                    "400": {
+                        "description": "Petición no valida"
+                    },
+                    "401": {
+                        "description": "Usuario no autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Obtiene la información del usuaro autenticado",
+                "description": "Obtiene la información del usuaro autenticado",
+                "operationId": "me",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "El login se realizó correctamente "
+                    },
+                    "400": {
+                        "description": "Petición no valida"
+                    },
+                    "401": {
+                        "description": "Usuario no autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Operaciones para el proceso de autenticación"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "jwt_key": {
+                "type": "apiKey",
+                "description": "Debe insertar el token generado en el proceso de autenticación",
+                "name": "Authorization",
+                "in": "header",
+                "template": "Bearer {}"
+            }
+        }
+    }
+}
