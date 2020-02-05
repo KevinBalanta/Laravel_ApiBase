@@ -15,10 +15,11 @@ La aplicación se encuentra desarrollada con las siguientes tecnologías:
 
 Configuración:
  * Crear un archivo .env y asignar la configuración necesaria.
-Instalación:
+
+ * Instalación:
 
     composer install
-    
+
 
  * Se puede usar un modelo de tabla de usuario personalizado, por defecto se creó el modelo app/Models/User.php y todo está configurado de acuerdo a este
 
