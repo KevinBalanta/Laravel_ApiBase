@@ -1,5 +1,12 @@
 <?php
 
+
+/*ESTE ES UN MODELO PERSONALIZADO PARA AUTH DE USUARIO EN EL API */
+
+
+
+
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -14,7 +21,7 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
     use Notifiable;
 
     protected $connection = 'application';
-    protected $table = 'app_users';
+    protected $table = 'usuario';
     public $timestamps = false;
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -44,11 +51,11 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
     ];
 
     public static function getAuthPasswordName(){
-        return 'password';
+        return 'clave';
     }
 
     public function getAuthPassword(){
-        return $this->password;
+        return $this->clave;
     }
 
     /**

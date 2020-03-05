@@ -3,12 +3,12 @@
 /**
  *       
  *  @OA\Info(
- *     description="Servicio que permite consultar y ejecutar procesos de fabrica",
+ *     description="Servicio API REST",
  *     version="1.0.0",
- *     title="API Ceniprof",
+ *     title="API BASE",
  *     @OA\Contact(
  *         name="SETI",
- *         email="meteorlogia@cenicana.org"
+ *         email="cirojas@cenicana.org"
  *     )
   *  )
  * 

@@ -26,7 +26,7 @@ class JWTAuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['email', 'clave']);
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -105,7 +105,7 @@ class JWTAuthController extends Controller
      *   ),
      *   @OA\Parameter(
      *     in="query",
-     *     name="password",
+     *     name="clave",
      *     description="Contraseña",
      *     required=true,
      *     @OA\Schema(
