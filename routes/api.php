@@ -31,3 +31,16 @@ Route::group([
 
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auditoria'
+
+], function ($router) {
+
+    Route::post('list', 'auditoriaController@list');
+    Route::get('show/{id}', 'auditoriaController@show');
+    
+});
+
+

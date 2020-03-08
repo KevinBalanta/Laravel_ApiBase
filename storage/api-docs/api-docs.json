@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API REST",
-        "description": "Servicio que permite consultar usuarios internos y externos de cenicaña",
+        "title": "API BASE",
+        "description": "Servicio API REST",
         "contact": {
             "name": "SETI",
             "email": "cirojas@cenicana.org"
@@ -11,7 +11,7 @@
     },
     "servers": [
         {
-            "url": "/API/api_base/public/api"
+            "url": "/ICESI/api_base/public/api"
         }
     ],
     "paths": {

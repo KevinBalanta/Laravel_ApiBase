@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
     use Notifiable;
 
     protected $connection = 'application';
-    protected $table = 'usuario';
+    protected $table = 'usuarios';
     public $timestamps = false;
     protected $primaryKey = 'id';
     public $incrementing = false;
