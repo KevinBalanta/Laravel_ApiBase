@@ -19,17 +19,26 @@ use Illuminate\Http\Request;
 
 Route::group([
 
-    'middleware' => 'api',
+   // 'middleware' => 'api',
+   'middleware' => ['jwt', 'jwt.auth'],
     'prefix' => 'auth'
 
 ], function ($router) {
 
-    Route::post('login', 'JWTAuthController@login');
+    
     Route::post('logout', 'JWTAuthController@logout');
     Route::post('refresh', 'JWTAuthController@refresh');
     Route::post('me', 'JWTAuthController@me');
 
 });
+
+Route::group(['prefix' => 'Auth'], function () {
+
+    Route::post('login', 'JWTAuthController@login');
+
+});
+
+
 
 Route::group([
 

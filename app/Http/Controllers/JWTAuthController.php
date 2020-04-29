@@ -16,7 +16,7 @@ class JWTAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('jwt:api', ['except' => ['login']]);
     }
 
     /**
@@ -26,11 +26,14 @@ class JWTAuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'clave']);
+        $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
+        
+        
 
         return $this->respondWithToken($token);
     }
