@@ -20,23 +20,47 @@ use Illuminate\Http\Request;
 Route::group([
 
    // 'middleware' => 'api',
-   'middleware' => ['jwt', 'jwt.auth'],
+  // 'middleware' => ['jwt', 'jwt.auth'],
     'prefix' => 'auth'
 
 ], function ($router) {
 
-    
+   Route::post('login', 'JWTAuthController@login');
     Route::post('logout', 'JWTAuthController@logout');
     Route::post('refresh', 'JWTAuthController@refresh');
-    Route::post('me', 'JWTAuthController@me');
+    Route::get('me', 'JWTAuthController@me');
+    Route::get('example', function() {
+        return ['name' => Auth::User()->name,
+    'id' => Auth::User()->id];
+    } );
+    
 
 });
 
-Route::group(['prefix' => 'Auth'], function () {
 
-    Route::post('login', 'JWTAuthController@login');
+Route::group([
 
-});
+    // 'middleware' => 'api',
+    'middleware' => ['jwt', 'jwt.auth'],
+     'prefix' => 'v1'
+ 
+ ], function ($router) {
+ 
+   
+     Route::get('estates', 'EstateController@index');
+     Route::get('example', function() {
+         return ['name' => Auth::User()->name,
+     'id' => Auth::User()->id];
+     } );
+     
+ 
+ });
+
+//  Route::group(['prefix' => 'Auth'], function () {
+
+//      Route::post('login', 'JWTAuthController@login');
+
+// });
 
 
 

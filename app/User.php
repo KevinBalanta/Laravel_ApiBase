@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Extensions\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use App\Models\Profile;
 
 class User extends Authenticatable implements JWTSubject, AuthenticatableContract
 {
@@ -48,6 +49,11 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
         return $this->password;
     }
 
+
+    public function isAdmin(){
+        return $this->profile->name === 'Administrador';
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -67,5 +73,20 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
     {
         return [];
     }
+
+    public function estates(){
+        return $this->hasMany(Estate::class);
+    }
+
+
+    public function profile(){
+        return $this->belongsTo(Profile::class);
+    }
+
+
+
+    
+
+    
 
 }

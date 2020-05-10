@@ -3,7 +3,7 @@
 /**
  *       
  *  @OA\Info(
- *     description="Servicio API REST",
+ *     description="Servicio API REST para la gestión y administración del sistema Automatizado de riego por goteo",
  *     version="1.0.0",
  *     title="API BASE",
  *     @OA\Contact(
