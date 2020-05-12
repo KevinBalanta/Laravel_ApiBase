@@ -1,17 +1,17 @@
 <?php
 
-namespace App;
+namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class IrrigationSystem extends Model
+class DropperType extends Model
 {
-    //
+
 
     use SoftDeletes;
 
-    public $table = 'irrigation_systems';
+    public $table = 'dropper_types';
 
     protected $dates = [
         'created_at',
@@ -26,7 +26,9 @@ class IrrigationSystem extends Model
         'deleted_at',
     ];
 
-    public function estateIrrigationSystems(){
-        return $this->hasMany(EstateIrrigationSystem::class);
+    public function droppers()
+    {
+        return $this->hasMany(Dropper::class);
+
     }
 }

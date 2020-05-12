@@ -48,6 +48,15 @@ Route::group([
  
    
      Route::get('estates', 'EstateController@index');
+     Route::get('estates/{estate}', 'EstateController@getById');
+
+     Route::get('water-source-types', 'WaterSourceController@getTypes');
+
+     Route::post('water-sources', 'WaterSourceController@store');
+     Route::get('water-sources', 'WaterSourceController@index');
+     Route::get('water-sources/{waterSource}', 'WaterSourceController@getById');
+     Route::delete('water-sources/{waterSource}', 'WaterSourceController@destroy');
+
      Route::get('example', function() {
          return ['name' => Auth::User()->name,
      'id' => Auth::User()->id];

@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Action extends Model
+class SurcosSeparation extends Model
 {
     use SoftDeletes;
 
-    public $table = 'actions';
+    public $table = 'surcos_separations';
 
     protected $dates = [
         'created_at',

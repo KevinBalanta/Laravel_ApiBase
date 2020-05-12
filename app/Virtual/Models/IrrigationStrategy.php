@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Irrigation extends Model
+class IrrigationStrategy extends Model
 {
     use SoftDeletes;
 
-    public $table = 'irrigations';
+    public $table = 'irrigation_strategies';
 
     protected $dates = [
         'created_at',
@@ -18,17 +18,9 @@ class Irrigation extends Model
     ];
 
     protected $fillable = [
-        'amount_hours',
-        'frequency_days',
-        'amount_minutes',
-        'strategy_id',
+        'name',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function strategy()
-    {
-        return $this->belongsTo(IrrigationStrategy::class, 'strategy_id');
-    }
 }

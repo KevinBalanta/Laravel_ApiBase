@@ -15,6 +15,7 @@ class CreateWaterSourcesTable extends Migration
     {
         Schema::create('water_sources', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->unique();
             $table->float('capacity', 8, 3);
             $table->integer('uptake_time');
             $table->timestamps();

@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WaterSource extends Model
+class IrrigationHeader extends Model
 {
     use SoftDeletes;
 
-    public $table = 'water_sources';
+    public $table = 'irrigation_headers';
 
     protected $dates = [
         'created_at',
@@ -18,22 +18,27 @@ class WaterSource extends Model
     ];
 
     protected $fillable = [
-        'capacity',
-        'uptake_time',
-        'type_id',
+        'name',
+        'motorpump_id',
         'estate_id',
+        'water_source_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function type()
+    public function motorpump()
     {
-        return $this->belongsTo(WaterSourceType::class, 'type_id');
+        return $this->belongsTo(Motorpump::class, 'motorpump_id');
     }
 
     public function estate()
     {
         return $this->belongsTo(Estate::class, 'estate_id');
+    }
+
+    public function water_source()
+    {
+        return $this->belongsTo(WaterSource::class, 'water_source_id');
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DropperType extends Model
+class Dropper extends Model
 {
 
 
     use SoftDeletes;
 
-    public $table = 'dropper_types';
+    public $table = 'droppers';
 
     protected $dates = [
         'created_at',
@@ -20,15 +20,17 @@ class DropperType extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'flow',
+        'separation',
+        'dropper_type_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function droppers()
+    public function dropper_type()
     {
-        return $this->hasMany(Dropper::class);
-
+        return $this->belongsTo(DropperType::class, 'dropper_type_id');
     }
+
 }

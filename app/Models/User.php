@@ -1,30 +1,17 @@
 <?php
 
-
-/*ESTE ES UN MODELO PERSONALIZADO PARA AUTH DE USUARIO EN EL API */
-
-
-
-
-
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Extensions\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use DB;
+use App\Extensions\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use App\Models\Profile;
 
 class User extends Authenticatable implements JWTSubject, AuthenticatableContract
 {
     use Notifiable;
-
-    protected $connection = 'application';
-    protected $table = 'usuarios';
-    public $timestamps = false;
-    protected $primaryKey = 'id';
-    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +19,7 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
      * @var array
      */
     protected $fillable = [
+        'name', 'email', 'password',
     ];
 
     /**
@@ -40,6 +28,7 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
      * @var array
      */
     protected $hidden = [
+        'password', 'remember_token',
     ];
 
     /**
@@ -48,14 +37,21 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
      * @var array
      */
     protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
+
     public static function getAuthPasswordName(){
-        return 'clave';
+        return 'password';
     }
 
     public function getAuthPassword(){
-        return $this->clave;
+        return $this->password;
+    }
+
+
+    public function isAdmin(){
+        return $this->profile->name === 'Administrador';
     }
 
     /**
@@ -77,5 +73,20 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
     {
         return [];
     }
+
+    public function estates(){
+        return $this->hasMany(Estate::class);
+    }
+
+
+    public function profile(){
+        return $this->belongsTo(Profile::class);
+    }
+
+
+
+    
+
+    
 
 }

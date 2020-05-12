@@ -109,7 +109,7 @@ class JWTAuthController extends Controller
      *   ),
      *   @OA\Parameter(
      *     in="query",
-     *     name="clave",
+     *     name="password",
      *     description="Contraseña",
      *     required=true,
      *     @OA\Schema(

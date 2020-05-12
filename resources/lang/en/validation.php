@@ -130,9 +130,19 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'El nombre es requerido',
+            'unique' => 'El nombre ya existe'
         ],
+        'capacity' => [
+            'required' => 'La capacidad es requerida',
+            'min' => 'La capacidad debe ser mayor a :min'
+        ],
+        'uptake_time' => [
+            'required' => 'El tiempo de captación es requerido',
+            'min' => 'El tiempo de captación debe ser mayor a :min'
+        ],
+        
     ],
 
     /*

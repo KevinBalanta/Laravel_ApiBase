@@ -16,6 +16,7 @@ class CreateEstatesTable extends Migration
         Schema::create('estates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->float('area', 6, 3);
             $table->timestamps();
         });
     }

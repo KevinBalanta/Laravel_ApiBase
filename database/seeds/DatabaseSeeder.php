@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Profile;
-use App\User;
-use App\Estate;
-use App\IrrigationSystem;
-use App\WaterSourceType;
-use App\DropperType;
-use App\SurcosSeparation;
-use App\IrrigationStrategy;
-use App\Action;
+use App\Models\User;
+use App\Models\Estate;
+use App\Models\IrrigationSystem;
+use App\Models\WaterSourceType;
+use App\Models\DropperType;
+use App\Models\SurcosSeparation;
+use App\Models\IrrigationStrategy;
+use App\Models\Action;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,31 +64,37 @@ class DatabaseSeeder extends Seeder
         
         Estate::create([
             'name' => 'Hacienda A',
+            'area' => 1000,
             'user_id' =>  $user1->id
         ]);
 
         Estate::create([
             'name' => 'Hacienda B',
+            'area' => 1500,
             'user_id' =>  $user1->id
         ]);
 
         Estate::create([
             'name' => 'Hacienda C',
+            'area' => 500.5,
             'user_id' =>  $user1->id
         ]);
 
         Estate::create([
             'name' => 'Hacienda Uno',
+            'area' => 880.9,
             'user_id' =>  $user2->id
         ]);
 
         Estate::create([
             'name' => 'Hacienda Dos',
+            'area' => 300.91,
             'user_id' =>  $user2->id
         ]);
 
         Estate::create([
             'name' => 'Hacienda ColombiaCaña',
+            'area' => 600,
             'user_id' =>  $user3->id
         ]);
 

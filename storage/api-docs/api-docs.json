@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API BASE",
-        "description": "Servicio API REST",
+        "description": "Servicio API REST para la gestión y administración del sistema Automatizado de riego por goteo",
         "contact": {
             "name": "SETI",
             "email": "cirojas@cenicana.org"
@@ -11,10 +11,90 @@
     },
     "servers": [
         {
-            "url": "/ICESI/api_base/public/api"
+            "url": "/api"
         }
     ],
     "paths": {
+        "/v1/estates": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get list of estates",
+                "description": "Returns list of estates",
+                "operationId": "getEstatesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/estates/{id}": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get estate information",
+                "description": "Returns estate data",
+                "operationId": "getEstateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Estate id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
@@ -34,7 +114,7 @@
                         }
                     },
                     {
-                        "name": "clave",
+                        "name": "password",
                         "in": "query",
                         "description": "Contraseña",
                         "required": true,
@@ -154,15 +234,192 @@
                     }
                 ]
             }
+        },
+        "/v1/water-sources": {
+            "get": {
+                "tags": [
+                    "WaterSources"
+                ],
+                "summary": "Get list of water sources",
+                "description": "Returns list of water sources",
+                "operationId": "getWaterSourceList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "WaterSources"
+                ],
+                "summary": "Store new water source",
+                "description": "Returns water source data",
+                "operationId": "storeWaterSource",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WaterSource"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WaterSource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/v1/water-sources/{id}": {
+            "get": {
+                "tags": [
+                    "WaterSources"
+                ],
+                "summary": "Get water source information",
+                "description": "Returns water source data",
+                "operationId": "getWaterSourcesById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Water source id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
         }
     },
-    "tags": [
-        {
-            "name": "Autenticación",
-            "description": "Operaciones para el proceso de autenticación"
-        }
-    ],
     "components": {
+        "schemas": {
+            "WaterSource": {
+                "title": "Water model",
+                "description": "WaterSource model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the Water Source",
+                        "type": "string",
+                        "example": "Rio Cauca"
+                    },
+                    "capacity": {
+                        "title": "Capacity",
+                        "description": "Capacity of the Water Source / M3 para Reservorio , Rio and Pozo M3/h",
+                        "type": "number",
+                        "format": "float",
+                        "example": "100.0"
+                    },
+                    "uptake_time": {
+                        "title": "UptakeTime",
+                        "description": "Uptake Timeof the Water Source in hours",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "100.0"
+                    },
+                    "type_id": {
+                        "title": "TypeId",
+                        "description": "The ID of the water source Type: (Rio, Pozo, Reservorio)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "estate_id": {
+                        "title": "EstateId",
+                        "description": "The ID of the estate where belongs the water source",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "WaterSource"
+                }
+            },
+            "EntityJsonResource": {
+                "title": "EntityJsonResource",
+                "description": "A Json wrapper resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "ref": null
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EntityJsonResource"
+                }
+            }
+        },
         "securitySchemes": {
             "jwt_key": {
                 "type": "apiKey",
@@ -172,5 +429,11 @@
                 "template": "Bearer {}"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Operaciones para el proceso de autenticación"
+        }
+    ]
 }

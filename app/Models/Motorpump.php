@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Indicator extends Model
+class Motorpump extends Model
 {
     use SoftDeletes;
 
-    public $table = 'indicators';
+    public $table = 'motorpumps';
 
     protected $dates = [
         'created_at',
@@ -18,9 +18,10 @@ class Indicator extends Model
     ];
 
     protected $fillable = [
-        'units',
-        'name',
-        'description',
+        'brand',
+        'reference',
+        'hp',
+        'flow',
         'created_at',
         'updated_at',
         'deleted_at',

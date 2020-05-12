@@ -1,15 +1,17 @@
 <?php
 
-namespace App;
+namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Motorpump extends Model
+class IrrigationSystem extends Model
 {
+    //
+
     use SoftDeletes;
 
-    public $table = 'motorpumps';
+    public $table = 'irrigation_systems';
 
     protected $dates = [
         'created_at',
@@ -18,12 +20,13 @@ class Motorpump extends Model
     ];
 
     protected $fillable = [
-        'brand',
-        'reference',
-        'hp',
-        'flow',
+        'name',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public function estateIrrigationSystems(){
+        return $this->hasMany(EstateIrrigationSystem::class);
+    }
 }

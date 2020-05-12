@@ -1,15 +1,17 @@
 <?php
 
-namespace App;
+namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WaterSourceType extends Model
+class Dropper extends Model
 {
+
+
     use SoftDeletes;
 
-    public $table = 'water_source_types';
+    public $table = 'droppers';
 
     protected $dates = [
         'created_at',
@@ -18,9 +20,17 @@ class WaterSourceType extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'flow',
+        'separation',
+        'dropper_type_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public function dropper_type()
+    {
+        return $this->belongsTo(DropperType::class, 'dropper_type_id');
+    }
+
 }
