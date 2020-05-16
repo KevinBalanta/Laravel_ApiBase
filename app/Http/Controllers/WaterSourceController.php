@@ -126,7 +126,7 @@ class WaterSourceController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:water_sources',
+            'name' => 'required|min:3',
             'capacity' => 'required|numeric|min:1.0,',
             'uptake_time' => 'required|numeric|min:1',
             'type_id' => 'required',

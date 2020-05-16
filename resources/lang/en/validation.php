@@ -132,7 +132,8 @@ return [
     'custom' => [
         'name' => [
             'required' => 'El nombre es requerido',
-            'unique' => 'El nombre ya existe'
+            'unique' => 'El nombre ya existe',
+            'min' => 'El nombre debe contener mínimo :min caracteres'
         ],
         'capacity' => [
             'required' => 'La capacidad es requerida',
@@ -142,6 +143,23 @@ return [
             'required' => 'El tiempo de captación es requerido',
             'min' => 'El tiempo de captación debe ser mayor a :min'
         ],
+        'motorpump_brand' => [
+            'required' => 'La marca de la motobomba es requerida',
+            'min' => 'la marca debe contener mínimo :min caracteres'
+        ],
+        'motorpump_reference' => [
+            'required' => 'La referencia de la motobomba es requerida',
+            'min' => 'la referencia debe contener mínimo :min caracteres'
+        ],
+        'motorpump_hp' => [
+            'required' => 'Los caballos de fuerza de la motobomba es requerido',
+            'min' => 'los caballos de fuerza de la motobomba deben ser de mínimo :min'
+        ],
+        'motorpump_flow' => [
+            'required' => 'El caudal de la motobomba es requerido',
+            'min' => 'El caudal de la motobomba deben ser de mínimo :min'
+        ],
+        
         
     ],
 

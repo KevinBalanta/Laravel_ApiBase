@@ -31,13 +31,13 @@ class AddRelationships extends Migration
 
         Schema::table('drip_irrigation_modules', function (Blueprint $table) {
             $table->unsignedInteger('estate_irrigation_system_id');
-            $table->foreign('estate_irrigation_system_id', 'estate_irrigation_system_fk_1428326')->references('id')->on('estate_irrigation_systems');
+            $table->foreign('estate_irrigation_system_id')->references('id')->on('estate_irrigation_systems');
             $table->unsignedInteger('dropper_id')->nullable();
-            $table->foreign('dropper_id', 'dropper_fk_1428327')->references('id')->on('droppers');
+            $table->foreign('dropper_id')->references('id')->on('droppers');
             $table->unsignedInteger('surco_separation_id');
-            $table->foreign('surco_separation_id', 'surco_separation_fk_1439345')->references('id')->on('surcos_separations');
+            $table->foreign('surco_separation_id')->references('id')->on('surcos_separations');
             $table->unsignedInteger('irrigation_id');
-            $table->foreign('irrigation_id', 'irrigation_fk_1439618')->references('id')->on('irrigations');
+            $table->foreign('irrigation_id')->references('id')->on('irrigations');
         });
 
         Schema::table('drip_irrigation_operations', function (Blueprint $table) {

@@ -15,8 +15,8 @@ class CreateConfigurationsTable extends Migration
     {
         Schema::create('configurations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('minimum_tension')->default(-40);
-            $table->integer('maximum_tension')->default(0);
+            $table->integer('minimum_tension')->default(0);
+            $table->integer('maximum_tension')->default(80);
             $table->integer('minimum_level_water')->default(20);
             $table->integer('maximum_level_water')->default(100);
             $table->time('start_time')->default('07:00:00');

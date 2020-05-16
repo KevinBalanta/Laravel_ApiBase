@@ -3,27 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class DropperType extends Model
 {
 
 
-    use SoftDeletes;
+    
 
     public $table = 'dropper_types';
 
     protected $dates = [
         'created_at',
-        'updated_at',
-        'deleted_at',
+        'updated_at'
     ];
 
     protected $fillable = [
         'name',
         'created_at',
-        'updated_at',
-        'deleted_at',
+        'updated_at'
     ];
 
     public function droppers()

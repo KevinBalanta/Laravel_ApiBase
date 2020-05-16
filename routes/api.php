@@ -46,16 +46,39 @@ Route::group([
  
  ], function ($router) {
  
-   
+    
+    //manejo de haciendas   
      Route::get('estates', 'EstateController@index');
      Route::get('estates/{estate}', 'EstateController@getById');
 
      Route::get('water-source-types', 'WaterSourceController@getTypes');
 
+     //actualizar un water source puede hacer cambiar las métricas
+     //water source - fuente de agua
      Route::post('water-sources', 'WaterSourceController@store');
      Route::get('water-sources', 'WaterSourceController@index');
      Route::get('water-sources/{waterSource}', 'WaterSourceController@getById');
-     Route::delete('water-sources/{waterSource}', 'WaterSourceController@destroy');
+    // Route::delete('water-sources/{waterSource}', 'WaterSourceController@destroy');
+
+     //irrigation header - cabezal de riego
+     Route::post('irrigation-headers', 'IrrigationHeaderController@store');
+     Route::get('irrigation-headers', 'IrrigationHeaderController@index');
+     Route::get('irrigation-headers/{irrigationHeader}', 'IrrigationHeaderController@getById');
+    
+     //obtener tipos de sistema de riego
+     Route::get('irrigation-systems', 'EstateIrrigationSystemController@getSistemTypes');
+    //obtener estrategias de riego
+     Route::get('irrigation-strategies', 'EstateIrrigationSystemController@getIrrigationStrategies');
+
+     Route::get('surcos-separation', 'EstateIrrigationSystemController@getSurcosSeparation');
+    
+     //creación de un sistema de riego para una hacienda
+     Route::post('estate-irrigation-systems', 'EstateIrrigationSystemController@store');
+
+     //tipos de gotero
+     Route::get('dropper-types', 'DripIrrigationModuleController@getDropperTypes');
+
+     Route::get('surco-separations', 'DripIrrigationModuleController@getSurcoSeparations');
 
      Route::get('example', function() {
          return ['name' => Auth::User()->name,
@@ -73,16 +96,5 @@ Route::group([
 
 
 
-Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'auditoria'
-
-], function ($router) {
-
-    Route::post('list', 'auditoriaController@list');
-    Route::get('show/{id}', 'auditoriaController@show');
-    
-});
 
 

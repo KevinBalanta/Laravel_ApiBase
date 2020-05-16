@@ -38,4 +38,8 @@ class Estate extends Model
     public function waterSources(){
         return $this->hasMany(WaterSource::class);
     }
+
+    public function irrigationHeaders(){
+        return $this->hasMany(IrrigationHeader::class);
+    }
 }

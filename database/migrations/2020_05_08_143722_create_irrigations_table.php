@@ -15,7 +15,6 @@ class CreateIrrigationsTable extends Migration
     {
         Schema::create('irrigations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('amount_hours');
             $table->integer('frequency_days');
             $table->integer('amount_minutes');
             $table->unsignedInteger('strategy_id');
