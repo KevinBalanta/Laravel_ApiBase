@@ -11,6 +11,8 @@ class DripIrrigationModule extends Model
 
     public $table = 'drip_irrigation_modules';
 
+    protected $with = ['dropper','surco_separation','irrigation'];
+
     protected $dates = [
         'created_at',
         'updated_at',

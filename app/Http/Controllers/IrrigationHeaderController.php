@@ -22,6 +22,15 @@ class IrrigationHeaderController extends Controller
      *   security={
      *     {"jwt_key": {}},
      *   }, 
+     *  @OA\Parameter(
+     *     name="estate_id",
+     *     required=true,
+     *     in="query",
+     *     description="The ID of the estate (hacienda)",
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -45,6 +54,40 @@ class IrrigationHeaderController extends Controller
         return (new EntityJsonResource($irrigationHeaders));
     }
 
+    /**
+     * @OA\Post(
+     *      path="/v1/irrigation-headers",
+     *      operationId="storeIrrigationHeader",
+     *      tags={"IrrigationHeaders"},
+     *      summary="Store new irrigation header",
+     *      description="Returns irrigation header data",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/IrrigationHeader")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/IrrigationHeader")
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+     */
+
 
     public function store(Request $request){
         
@@ -54,7 +97,7 @@ class IrrigationHeaderController extends Controller
             'motorpump_reference' => 'required|min:3',
             'motorpump_hp' => 'required|numeric|min:1',
             'motorpump_flow' => 'required|numeric|min:1',
-            'watersource_id' => 'required',
+            'water_source_id' => 'required',
             'estate_id' => 'required'
         ] );
 
@@ -74,14 +117,11 @@ class IrrigationHeaderController extends Controller
             'name' => ($request->name),
             'motorpump_id' => ($motorpump->id),
             'estate_id' => ($request->estate_id),
-            'water_source_id' => ($request->watersource_id)
+            'water_source_id' => ($request->water_source_id)
         ]);
 
 
-        return  response()->json([
-            (new EntityJsonResource($irrigation_header))
-        ])
-        ->setStatusCode(Response::HTTP_CREATED);
+        return (new EntityJsonResource($irrigation_header));
 
     }
 

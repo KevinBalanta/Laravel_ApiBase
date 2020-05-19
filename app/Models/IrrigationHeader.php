@@ -11,6 +11,8 @@ class IrrigationHeader extends Model
 
     public $table = 'irrigation_headers';
 
+    protected $with = ['motorpump','water_source'];
+
     protected $dates = [
         'created_at',
         'updated_at',

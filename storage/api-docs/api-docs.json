@@ -15,6 +15,207 @@
         }
     ],
     "paths": {
+        "/v1/drip-irrigation-modules": {
+            "get": {
+                "tags": [
+                    "DripIrrigationModules"
+                ],
+                "summary": "Get list of drip irrigation modules",
+                "description": "Returns list of drip irrigation modules ",
+                "operationId": "getDripIrrigationModuleList",
+                "parameters": [
+                    {
+                        "name": "estate_irrigation_system_id",
+                        "in": "query",
+                        "description": "The ID of the estate irrigation system ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "DripIrrigationModules"
+                ],
+                "summary": "Store new drip irrigation module",
+                "description": "Returns drip irrigation module data",
+                "operationId": "storeDripIrrigationModule",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DripIrrigationModule"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DripIrrigationModule"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/drip-irrigation-modules/{id}": {
+            "get": {
+                "tags": [
+                    "DripIrrigationModules"
+                ],
+                "summary": "Get drip irrigation module information",
+                "description": "Returns drip irrigation module data",
+                "operationId": "getDripIrrigationModuleById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Drip irrigation module id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/dropper-types": {
+            "get": {
+                "tags": [
+                    "DropperTypes"
+                ],
+                "summary": "Get list of dropper types",
+                "description": "Returns list of dropper types",
+                "operationId": "getDropperTypesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/surco-separations": {
+            "get": {
+                "tags": [
+                    "SurcoSeparations"
+                ],
+                "summary": "Get list of surco separations ",
+                "description": "Returns list of surco separations (mts)",
+                "operationId": "getSurcoSeparationsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
         "/v1/estates": {
             "get": {
                 "tags": [
@@ -61,6 +262,360 @@
                         "name": "id",
                         "in": "path",
                         "description": "Estate id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/estate-irrigation-systems": {
+            "get": {
+                "tags": [
+                    "EstateIrrigationSystems"
+                ],
+                "summary": "Get list of irrigation systems",
+                "description": "Returns list of irrigation systems filter by its type of system and irrgation header \n     *      (filtro por tipo de sistema de riego o cabezal de riego)",
+                "operationId": "getEstateIrrigationSystemList",
+                "parameters": [
+                    {
+                        "name": "estate_id",
+                        "in": "query",
+                        "description": "The ID of the estate (hacienda)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "irrigation_system_id",
+                        "in": "query",
+                        "description": "The ID of the type of system (tipo: goteo, aspersión, ..)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "irrigation_header_id",
+                        "in": "query",
+                        "description": "The ID of the irrigation header of the system (cabezal de riego)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "EstateIrrigationSystems"
+                ],
+                "summary": "Store new estate irrigation system",
+                "description": "Returns estate irrigation system data",
+                "operationId": "storeEstateIrrigationSystem",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EstateIrrigationSystem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EstateIrrigationSystem"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/estate-irrigation-systems/{id}": {
+            "get": {
+                "tags": [
+                    "EstateIrrigationSystems"
+                ],
+                "summary": "Get estate irrigation system information",
+                "description": "Returns estate irrigation system data",
+                "operationId": "getEstateIrrigationSystemById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Estate irrigation system id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/irrigation-systems": {
+            "get": {
+                "tags": [
+                    "IrrigationSystems"
+                ],
+                "summary": "Get list of irrigation systems",
+                "description": "Returns list of irrigation systems",
+                "operationId": "getIrrigationSystemList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/irrigation-strategies": {
+            "get": {
+                "tags": [
+                    "IrrigationEstrategies"
+                ],
+                "summary": "Get list of irrigation estrategies",
+                "description": "Returns list of irrigation estrategies",
+                "operationId": "getIrrigationEstrategiesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/irrigation-headers": {
+            "get": {
+                "tags": [
+                    "IrrigationHeaders"
+                ],
+                "summary": "Get list of irrigation headers",
+                "description": "Returns list of irrigation headers",
+                "operationId": "getIrrigationHeaderList",
+                "parameters": [
+                    {
+                        "name": "estate_id",
+                        "in": "query",
+                        "description": "The ID of the estate (hacienda)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityJsonResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "IrrigationHeaders"
+                ],
+                "summary": "Store new irrigation header",
+                "description": "Returns irrigation header data",
+                "operationId": "storeIrrigationHeader",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IrrigationHeader"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IrrigationHeader"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
+        },
+        "/v1/irrigation-headers/{id}": {
+            "get": {
+                "tags": [
+                    "IrrigationHeaders"
+                ],
+                "summary": "Get irrigation header information",
+                "description": "Returns irrigation header data",
+                "operationId": "getIrrigationHeadersById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Irrigation header id",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -205,7 +760,7 @@
             }
         },
         "/auth/me": {
-            "post": {
+            "get": {
                 "tags": [
                     "Autenticación"
                 ],
@@ -243,6 +798,17 @@
                 "summary": "Get list of water sources",
                 "description": "Returns list of water sources",
                 "operationId": "getWaterSourceList",
+                "parameters": [
+                    {
+                        "name": "estate_id",
+                        "in": "query",
+                        "description": "The ID of the estate (hacienda)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -304,7 +870,12 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
             }
         },
         "/v1/water-sources/{id}": {
@@ -353,12 +924,348 @@
                     }
                 ]
             }
+        },
+        "/v1/water-source-types": {
+            "get": {
+                "tags": [
+                    "WaterSourceTypes"
+                ],
+                "summary": "Get list of water source types",
+                "description": "Returns list of water source types",
+                "operationId": "getWaterSourceTypesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WaterSourceType"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_key": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "DripIrrigationModule": {
+                "title": "Drip Irrigation  model",
+                "description": "DripIrrigationModule model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the irrigation system (min: 3 characters)",
+                        "type": "string",
+                        "example": "Sistema A"
+                    },
+                    "area": {
+                        "title": "Area",
+                        "description": "Area of the module ",
+                        "type": "number",
+                        "format": "float",
+                        "example": "60"
+                    },
+                    "estate_irrigation_system_id": {
+                        "title": "EstateIrrigationSystemId",
+                        "description": "The ID of the irrigation system (sistema de riego de una hacienda)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "dropper_type_id": {
+                        "title": "DropperTypeId",
+                        "description": "The ID of the dropper type (el tipo de un gotero)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "dropper_flow": {
+                        "title": "Dropper flow",
+                        "description": "The flow of the dropper (flujo del gotero)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "2.0"
+                    },
+                    "surco_separation_id": {
+                        "title": "SurcoSeparationId",
+                        "description": "The ID of the surco separation (separación entre surcos)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "dropper_separation": {
+                        "title": "Dropper separation",
+                        "description": "The separation between droppers (separación entre goteros mts)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "0.5"
+                    },
+                    "irrigation_strategy_id": {
+                        "title": "IrrigationStrategyId",
+                        "description": "The ID of the irrigation strategy (estrategia de riego)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "irrigation_amount_minutes": {
+                        "title": "IrrigationMinutes",
+                        "description": "Minutes for the irrigation (minutos de riego)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "80"
+                    },
+                    "irrigation_frequency_days": {
+                        "title": "IrrigationDays",
+                        "description": "The amount of irrigation days per week (# días de riego a la semana)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "5"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "DripIrrigationModule"
+                }
+            },
+            "DripIrrigationModules": {
+                "title": "Drip Irrigation Modules model",
+                "description": "DripIrrigationModules model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the irrigation system (min: 3 characters)",
+                        "type": "string",
+                        "example": "module A"
+                    },
+                    "area": {
+                        "title": "Area",
+                        "description": "Area of the module ",
+                        "type": "number",
+                        "format": "float",
+                        "example": "60"
+                    },
+                    "dropper_type_id": {
+                        "title": "DropperTypeId",
+                        "description": "The ID of the dropper type (el tipo de un gotero)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "dropper_flow": {
+                        "title": "Dropper flow",
+                        "description": "The flow of the dropper (flujo del gotero)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "2.0"
+                    },
+                    "surco_separation_id": {
+                        "title": "SurcoSeparationId",
+                        "description": "The ID of the surco separation (separación entre surcos)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "dropper_separation": {
+                        "title": "Dropper separation",
+                        "description": "The separation between droppers (separación entre goteros mts)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "0.5"
+                    },
+                    "irrigation_strategy_id": {
+                        "title": "IrrigationStrategyId",
+                        "description": "The ID of the irrigation strategy (estrategia de riego)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "irrigation_amount_minutes": {
+                        "title": "IrrigationMinutes",
+                        "description": "Minutes for the irrigation (minutos de riego)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "80"
+                    },
+                    "irrigation_frequency_days": {
+                        "title": "IrrigationDays",
+                        "description": "The amount of irrigation days per week (# días de riego a la semana)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "5"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "DripIrrigationModules"
+                }
+            },
+            "EstateIrrigationSystem": {
+                "title": "Estate Irrigation System model",
+                "description": "EstateIrrigationSystem model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the irrigation system (min: 3 characters)",
+                        "type": "string",
+                        "example": "Sistema A"
+                    },
+                    "minimum_tension": {
+                        "title": "MinimumTension",
+                        "description": "The minimum tension for the system (configuration)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "maximum_tension": {
+                        "title": "MaximumTension",
+                        "description": "The maximum tension for the system (configuration)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "70"
+                    },
+                    "minimum_level_water": {
+                        "title": "MinimumLevelWater",
+                        "description": "The minimum level of water for the system (configuration)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "maximum_level_water": {
+                        "title": "MaximumLevelWater",
+                        "description": "The maximum level of water for the system (configuration)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "70"
+                    },
+                    "start_time": {
+                        "title": "Start Time",
+                        "description": "The initial time to start system operations (format hh:mm:ss 24h)",
+                        "type": "string",
+                        "format": "time",
+                        "example": "07:00:00"
+                    },
+                    "end_time": {
+                        "title": "End Time",
+                        "description": "The final time of the system operations (format hh:mm:ss 24h)",
+                        "type": "string",
+                        "format": "time",
+                        "example": "17:00:00"
+                    },
+                    "lamina": {
+                        "title": "Lamina",
+                        "description": "Lámina de agua % (número entre 0 y 1)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "1.0"
+                    },
+                    "irrigation_system_id": {
+                        "title": "IrrigationSystemId",
+                        "description": "The ID of the irrigation system ",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "estate_id": {
+                        "title": "EstateId",
+                        "description": "The ID of the estate (hacienda) ",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "irrigation_header_id": {
+                        "title": "IrrigationHeaderId",
+                        "description": "The ID of the irrigation header (cabezal de riego) ",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "modules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DripIrrigationModules"
+                        },
+                        "xml": {
+                            "name": "DripIrrigationModules",
+                            "wrapped": true
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EstateIrrigationSystem"
+                }
+            },
+            "IrrigationHeader": {
+                "title": "Irrigation Header model",
+                "description": "IrrigationHeader model",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the irrigation header",
+                        "type": "string",
+                        "example": "Cabezal A"
+                    },
+                    "estate_id": {
+                        "title": "EstateId",
+                        "description": "The ID of the estate (Hacienda)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "water_source_id": {
+                        "title": "WaterSourceId",
+                        "description": "The ID of the water source (Fuente de agua)",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "motorpump_brand": {
+                        "title": "Motorpump brand",
+                        "description": "The brand of the motorpump (la marca de la motobomba)",
+                        "type": "string",
+                        "example": "Honda"
+                    },
+                    "motorpump_reference": {
+                        "title": "Motorpump reference",
+                        "description": "The reference of the motorpump (la ref de la motobomba)",
+                        "type": "string",
+                        "example": "modelo XYZ"
+                    },
+                    "motorpump_hp": {
+                        "title": "Motorpump HP",
+                        "description": "The HP of the motorpump (caballos de fuerza de la motobomba)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "10.5"
+                    },
+                    "motorpump_flow": {
+                        "title": "Motorpump flow",
+                        "description": "The flow of the motorpump (flujo de la motobomba)",
+                        "type": "number",
+                        "format": "float",
+                        "example": "5.5"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "IrrigationHeader"
+                }
+            },
             "WaterSource": {
-                "title": "Water model",
+                "title": "Water Source model",
                 "description": "WaterSource model",
                 "properties": {
                     "name": {
@@ -379,7 +1286,7 @@
                         "description": "Uptake Timeof the Water Source in hours",
                         "type": "integer",
                         "format": "int64",
-                        "example": "100.0"
+                        "example": "16"
                     },
                     "type_id": {
                         "title": "TypeId",
@@ -399,6 +1306,50 @@
                 "type": "object",
                 "xml": {
                     "name": "WaterSource"
+                }
+            },
+            "WaterSourceType": {
+                "title": "Water Source Type model",
+                "description": "WaterSourceType model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "deleted_at": {
+                        "title": "Deleted at",
+                        "description": "Deleted at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "tipo de fuente de agua",
+                        "type": "string",
+                        "example": "Río"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "WaterSourceType"
                 }
             },
             "EntityJsonResource": {

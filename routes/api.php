@@ -47,13 +47,14 @@ Route::group([
  ], function ($router) {
  
     
-    //manejo de haciendas   
+    //obtener todas las haciendas de un usuario  
      Route::get('estates', 'EstateController@index');
+     //obtener hacienda por id
      Route::get('estates/{estate}', 'EstateController@getById');
-
+    //obtener tipos de fuente de agua
      Route::get('water-source-types', 'WaterSourceController@getTypes');
 
-     //actualizar un water source puede hacer cambiar las métricas
+     
      //water source - fuente de agua
      Route::post('water-sources', 'WaterSourceController@store');
      Route::get('water-sources', 'WaterSourceController@index');
@@ -69,16 +70,28 @@ Route::group([
      Route::get('irrigation-systems', 'EstateIrrigationSystemController@getSistemTypes');
     //obtener estrategias de riego
      Route::get('irrigation-strategies', 'EstateIrrigationSystemController@getIrrigationStrategies');
-
-     Route::get('surcos-separation', 'EstateIrrigationSystemController@getSurcosSeparation');
+    
     
      //creación de un sistema de riego para una hacienda
      Route::post('estate-irrigation-systems', 'EstateIrrigationSystemController@store');
+     //obtener sistemas de riego de un usuario (filtro -> {tipo, cabezal})
+     Route::get('estate-irrigation-systems', 'EstateIrrigationSystemController@index');
+    //obtener un sistema de riego por id
+     Route::get('estate-irrigation-systems/{estateIrrigationSystem}', 'EstateIrrigationSystemController@getById');
 
      //tipos de gotero
      Route::get('dropper-types', 'DripIrrigationModuleController@getDropperTypes');
-
+    //obtener separación entre surcos
      Route::get('surco-separations', 'DripIrrigationModuleController@getSurcoSeparations');
+     
+    
+    //creación de un nuevo módulo de riego por goteo 
+     Route::post('drip-irrigation-modules', 'DripIrrigationModuleController@store');
+    //obtener módulos de riego por goteo de un sistema determinado
+    Route::get('drip-irrigation-modules', 'DripIrrigationModuleController@index');
+    //obtener módulos de riego por goteo de un sistema determinado
+    Route::get('drip-irrigation-modules/{dripIrrigationModule}', 'DripIrrigationModuleController@getById');
+
 
      Route::get('example', function() {
          return ['name' => Auth::User()->name,

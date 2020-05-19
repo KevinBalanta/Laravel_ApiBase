@@ -15,6 +15,7 @@ use App\Models\EstateIrrigationSystem;
 use App\Models\Irrigation;
 use App\Models\Dropper;
 use App\Models\DripIrrigationModule;
+use App\Models\Estate;
 
 class EstateIrrigationSystemController extends Controller
 {
@@ -26,6 +27,9 @@ class EstateIrrigationSystemController extends Controller
      *      tags={"EstateIrrigationSystems"},
      *      summary="Store new estate irrigation system",
      *      description="Returns estate irrigation system data",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/EstateIrrigationSystem")
@@ -66,8 +70,8 @@ class EstateIrrigationSystemController extends Controller
             'maximum_tension' => 'required|numeric|max:80',
             'minimum_level_water' => 'required|numeric|min:20',
             'maximum_level_water' => 'required|numeric|max:100',
-            'start_time' => 'required|date_format:H:i:s|after:07:00:00',
-            'end_time' => 'required|date_format:H:i:s|after:start_time|before:17:00:00',
+            'start_time' => 'required|date_format:H:i:s|after:06:59:59',
+            'end_time' => 'required|date_format:H:i:s|after:start_time|before:17:00:01',
             'lamina' => 'required|numeric|between:0.0,1.0',
             'irrigation_system_id' => 'required',
             'estate_id' => 'required',
@@ -80,7 +84,7 @@ class EstateIrrigationSystemController extends Controller
             'modules.*.dropper_separation' => 'required|numeric|min:0.1',
             'modules.*.irrigation_strategy_id' =>'required',
             'modules.*.irrigation_amount_minutes' => 'required|numeric|min:10',
-            'modules.*.irrigation_frequency_days' => 'required|numeric|min:1'
+            'modules.*.irrigation_frequency_days' => 'required|numeric|between:1,7'
 
 
         ] );
@@ -144,23 +148,199 @@ class EstateIrrigationSystemController extends Controller
          }
 
     
-        return  response()->json([
-           (new EntityJsonResource($estate_irrigation_system))
-        ])
-        ->setStatusCode(Response::HTTP_CREATED);
+        return  (new EntityJsonResource($estate_irrigation_system));
     }
 
-    public function getSurcosSeparation(){
-        return (new EntityJsonResource(SurcosSeparation::All()));
-    }
     /**
-     * irrigation system types
+     * @OA\Get(
+     *      path="/v1/estate-irrigation-systems",
+     *      operationId="getEstateIrrigationSystemList",
+     *      tags={"EstateIrrigationSystems"},
+     *      summary="Get list of irrigation systems",
+     *      description="Returns list of irrigation systems filter by its type of system and irrgation header 
+     *      (filtro por tipo de sistema de riego o cabezal de riego)",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     * @OA\Parameter(
+     *     name="estate_id",
+     *     required=true,
+     *     in="query",
+     *     description="The ID of the estate (hacienda)",
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
+     * @OA\Parameter(
+     *     name="irrigation_system_id",
+     *     required=false,
+     *     in="query",
+     *     description="The ID of the type of system (tipo: goteo, aspersión, ..)",
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
+     * @OA\Parameter(
+     *     name="irrigation_header_id",
+     *     required=false,
+     *     in="query",
+     *     description="The ID of the irrigation header of the system (cabezal de riego)",
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/EntityJsonResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+
+    public function index(Request $request){
+        $estate_id = $request->query('estate_id');
+        $irrigation_system_id = $request->query('irrigation_system_id');
+        $irrigation_header_id = $request->query('irrigation_header_id');
+        
+        //obtener la hacienda y todos los sistemas
+        //filtrar tipo
+        //filtrar cabezal
+        if(is_null($estate_id)){
+            return  response()->json([
+                'message' => 'estate_id es requerido'
+            ],400);
+        }
+
+       $estate = Estate::where('id',$estate_id)->first();
+
+       $systems = $estate->estateIrrigationSystems;
+
+       if(!is_null($irrigation_system_id)){
+            $systems = $systems->where('irrigation_system_id',$irrigation_system_id );
+       }
+
+       if(!is_null($irrigation_header_id)){
+        $systems = $systems->where('irrigation_header_id',$irrigation_header_id );
+       }
+
+       //cómo obtener todos los objetos asociados? (eager loading papá)
+
+        return  (new EntityJsonResource($systems));
+
+
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/v1/estate-irrigation-systems/{id}",
+     *      operationId="getEstateIrrigationSystemById",
+     *      tags={"EstateIrrigationSystems"},
+     *      summary="Get estate irrigation system information",
+     *      description="Returns estate irrigation system data",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Estate irrigation system id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/EntityJsonResource")
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+     */
+    public function getById(EstateIrrigationSystem $estateIrrigationSystem){
+        return (new EntityJsonResource($estateIrrigationSystem));
+    }
+
+   
+    
+
+    /**
+     * @OA\Get(
+     *      path="/v1/irrigation-systems",
+     *      operationId="getIrrigationSystemList",
+     *      tags={"IrrigationSystems"},
+     *      summary="Get list of irrigation systems",
+     *      description="Returns list of irrigation systems",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/EntityJsonResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function getSistemTypes(){
 
         return (new EntityJsonResource(IrrigationSystem::All()));
 
     }
+
+    /**
+     * @OA\Get(
+     *      path="/v1/irrigation-strategies",
+     *      operationId="getIrrigationEstrategiesList",
+     *      tags={"IrrigationEstrategies"},
+     *      summary="Get list of irrigation estrategies",
+     *      description="Returns list of irrigation estrategies",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/EntityJsonResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
 
     public function getIrrigationStrategies(){
         return (new EntityJsonResource(IrrigationStrategy::All()));

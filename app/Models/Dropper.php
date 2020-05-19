@@ -13,6 +13,8 @@ class Dropper extends Model
 
     public $table = 'droppers';
 
+    protected $with = ['dropper_type'];
+
     protected $dates = [
         'created_at',
         'updated_at',

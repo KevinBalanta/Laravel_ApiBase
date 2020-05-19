@@ -11,6 +11,8 @@ class EstateIrrigationSystem extends Model
 
     public $table = 'estate_irrigation_systems';
 
+    protected $with = ['configuration','irrigation_header','irrigation_system'];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -48,6 +50,11 @@ class EstateIrrigationSystem extends Model
         return $this->belongsTo(IrrigationHeader::class, 'irrigation_header_id');
     }
 
+
+    public function drip_irrigation_modules()
+    {
+        return $this->hasMany(DripIrrigationModule::class);
+    }
    
     
 }

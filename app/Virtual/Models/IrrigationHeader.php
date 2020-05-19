@@ -4,7 +4,17 @@ namespace App\virtual\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+/**
+ * 
+ *
+ * @OA\Schema(
+ *     description="IrrigationHeader model",
+ *     title="Irrigation Header model",
+ *     @OA\Xml(
+ *         name="IrrigationHeader"
+ *     )
+ * )
+ */
 class IrrigationHeader extends Model
 {
     use SoftDeletes;
@@ -26,6 +36,98 @@ class IrrigationHeader extends Model
         'updated_at',
         'deleted_at',
     ];
+
+
+     /**
+     * @OA\Property(
+     *      title="Name",
+     *      description="Name of the irrigation header",
+     *      example="Cabezal A"
+     * )
+     *
+     * @var string
+     */
+    public $name;
+
+    
+
+    /**
+     * @OA\Property(
+     *      title="EstateId",
+     *      format="int64",
+     *      description="The ID of the estate (Hacienda)",
+     *      example="1"
+     * )
+     *
+     * @var integer
+     */
+    public $estate_id;
+
+    /**
+     * @OA\Property(
+     *      title="WaterSourceId",
+     *      format="int64",
+     *      description="The ID of the water source (Fuente de agua)",
+     *      example="1"
+     * )
+     *
+     * @var integer
+     */
+    public $water_source_id;
+
+    /**
+     * @OA\Property(
+     *      title="Motorpump brand",
+     *      description="The brand of the motorpump (la marca de la motobomba)",
+     *      example="Honda"
+     * )
+     *
+     * @var string
+     */
+    public $motorpump_brand;
+
+
+    /**
+     * @OA\Property(
+     *      title="Motorpump reference",
+     *      description="The reference of the motorpump (la ref de la motobomba)",
+     *      example="modelo XYZ"
+     * )
+     *
+     * @var string
+     */
+    public $motorpump_reference;
+
+    /**
+     * @OA\Property(
+     *      title="Motorpump HP",
+     *      format="float",
+     *      description="The HP of the motorpump (caballos de fuerza de la motobomba)",
+     *      example="10.5"
+     * )
+     *
+     * @var float
+     */
+
+    public $motorpump_hp;
+
+
+    /**
+     * @OA\Property(
+     *      title="Motorpump flow",
+     *      format="float",
+     *      description="The flow of the motorpump (flujo de la motobomba)",
+     *      example="5.5"
+     * )
+     *
+     * @var float
+     */
+
+    public $motorpump_flow;
+
+
+
+
 
     public function motorpump()
     {

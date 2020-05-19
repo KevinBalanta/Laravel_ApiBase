@@ -13,6 +13,8 @@ class User extends Authenticatable implements JWTSubject, AuthenticatableContrac
 {
     use Notifiable;
 
+    protected $with = ['profile'];
+
     /**
      * The attributes that are mass assignable.
      *

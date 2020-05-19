@@ -11,7 +11,7 @@ class WaterSource extends Model
 
     public $table = 'water_sources';
 
-    
+    protected $with = ['type'];
 
     protected $dates = [
         'created_at',

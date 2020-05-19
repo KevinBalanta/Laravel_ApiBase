@@ -191,7 +191,7 @@ class JWTAuthController extends Controller
      */
 
   /**
-     * @OA\Post(path="/auth/me",
+     * @OA\Get(path="/auth/me",
      *   tags={"Autenticación"},
      *   summary="Obtiene la información del usuaro autenticado",
      *   description="Obtiene la información del usuaro autenticado",

@@ -11,6 +11,8 @@ class Irrigation extends Model
 
     public $table = 'irrigations';
 
+    protected $with = ['strategy'];
+
     protected $dates = [
         'created_at',
         'updated_at',

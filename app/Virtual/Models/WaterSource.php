@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @OA\Schema(
  *     description="WaterSource model",
- *     title="Water model",
+ *     title="Water Source model",
  *     @OA\Xml(
  *         name="WaterSource"
  *     )
@@ -71,7 +71,7 @@ class WaterSource extends Model
      *      title="UptakeTime",
      *      format="int64",
      *      description="Uptake Timeof the Water Source in hours",
-     *      example="100.0"
+     *      example="16"
      * )
      *
      * @var integer
@@ -104,6 +104,8 @@ class WaterSource extends Model
      * @var integer
      */
     public $estate_id;
+
+    
 
     public function type()
     {

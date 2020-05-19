@@ -24,6 +24,15 @@ class WaterSourceController extends Controller
      *   security={
      *     {"jwt_key": {}},
      *   }, 
+     * @OA\Parameter(
+     *     name="estate_id",
+     *     required=true,
+     *     in="query",
+     *     description="The ID of the estate (hacienda)",
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -97,6 +106,9 @@ class WaterSourceController extends Controller
      *      tags={"WaterSources"},
      *      summary="Store new water source",
      *      description="Returns water source data",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/WaterSource")
@@ -144,12 +156,34 @@ class WaterSourceController extends Controller
         $waterS = WaterSource::create($request->all());
 
    
-        return  response()->json([
-            $waterS
-        ])
-        ->setStatusCode(Response::HTTP_CREATED);
+        return  (new EntityJsonResource($waterS));
     }
 
+    /**
+     * @OA\Get(
+     *      path="/v1/water-source-types",
+     *      operationId="getWaterSourceTypesList",
+     *      tags={"WaterSourceTypes"},
+     *      summary="Get list of water source types",
+     *      description="Returns list of water source types",
+     *   security={
+     *     {"jwt_key": {}},
+     *   }, 
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/WaterSourceType")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
 
     public function getTypes(){
 
@@ -158,13 +192,13 @@ class WaterSourceController extends Controller
 
     }
 
-    public function destroy(WaterSource $waterSource){
+    // public function destroy(WaterSource $waterSource){
 
-        $waterSource->delete();
+    //     $waterSource->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+    //     return response(null, Response::HTTP_NO_CONTENT);
 
-    }
+    // }
 
 
 
