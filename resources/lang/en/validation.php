@@ -135,6 +135,33 @@ return [
             'unique' => 'El nombre ya existe',
             'min' => 'El nombre debe contener mínimo :min caracteres'
         ],
+        'area' => [
+            'required' => 'El área es requerida',
+            'numeric' => 'El área debe ser numérica en hectárea'
+        ],
+        'dropper_flow' => [
+            'required' => 'el flujo del gotero es requerido',
+            'numeric' => 'el flujo del gotero es numérico',
+            'min' => 'el caudal del gotero debe ser de mínimo :min Litros/Hora'
+        ],
+        'dropper_separation' => [
+            'required' => 'la separación entre goteros es requerida',
+            'numeric' => 'La separación entre goteros es numérica',
+            'min' => 'La separación entre goteros es de mínimo :min mts' 
+        ],
+        'irrigation_strategy_id' => [
+            'required' => 'La estrategía de riego es requerida'
+        ],
+        'irrigation_amount_minutes' => [
+            'required' => 'Los minutos de riego son requeridos',
+            'numeric' => 'Los minutos de riego deben ser numéricos',
+            'min' => 'Los minutos de riego deben ser mínimo :min minutos'
+        ],
+        'irrigation_frequency_days' => [
+            'required' => 'La cantidad de días de riego es requerido',
+            'numeric' => 'La cantidad de días de riego es numérica'
+        ],
+        
         'capacity' => [
             'required' => 'La capacidad es requerida',
             'min' => 'La capacidad debe ser mayor a :min'
@@ -145,21 +172,53 @@ return [
         ],
         'motorpump_brand' => [
             'required' => 'La marca de la motobomba es requerida',
-            'min' => 'la marca debe contener mínimo :min caracteres'
+            'min' => 'La marca debe contener mínimo :min caracteres'
         ],
         'motorpump_reference' => [
             'required' => 'La referencia de la motobomba es requerida',
-            'min' => 'la referencia debe contener mínimo :min caracteres'
+            'min' => 'La referencia debe contener mínimo :min caracteres'
         ],
         'motorpump_hp' => [
             'required' => 'Los caballos de fuerza de la motobomba es requerido',
-            'min' => 'los caballos de fuerza de la motobomba deben ser de mínimo :min'
+            'min' => 'Los caballos de fuerza de la motobomba deben ser de mínimo :min'
         ],
         'motorpump_flow' => [
             'required' => 'El caudal de la motobomba es requerido',
-            'min' => 'El caudal de la motobomba deben ser de mínimo :min'
+            'min' => 'El caudal de la motobomba deben ser mayor o igual a :min '
         ],
-        
+        'minimum_tension' => [
+            'required' => 'La tensión mínima del sistema es requerida',
+            'numeric' => 'La tensión mínima debe ser un número mayor o igual a cero kPa',
+            'min' => 'La tensión mínima debe ser de mayor o igual a :min kPa'
+        ],
+        'maximum_tension' => [
+            'required' => 'La tensión máxima del sistema es requerida',
+            'numeric' => 'La tensión máxima debe ser un número menor o igual a 80 kPa',
+            'max' => 'La tensión máxima debe ser menor o igual :max kPa'
+        ],
+        'maximum_level_water' => [
+            'required' => 'El nivel máximo de agua del sistema es requerida',
+            'numeric' => 'El nivel máximo de agua debe ser un número menor o igual a 100 M3',
+            'max' => 'La tensión máxima debe ser menor o igual a :max M3'
+        ],
+        'minimum_level_water' => [
+            'required' => 'El nivel mínimo de agua del sistema es requerida',
+            'numeric' => 'El nivel mínimo de agua debe ser un número mayor o igual a 20 M3',
+            'min' => 'La tensión mínima debe ser mayor o igual a :max M3'
+        ],
+        'start_time' => [
+            'required' => 'El tiempo de inicio del sistema es requerido',
+        ],
+        'end_time' => [
+            'required' => 'El tiempo de finalización del sistema es requerido',
+            'after' => 'El tiempo de finalización debe ser despues del tiempo de inicialización del sistema'
+        ],
+        'lamina' => [
+            'required' => 'La lámina de agua es requerida',
+            'numeric' => 'La lámina de agua debe ser númerica',
+            'between' => 'La lámina de agua debe estar entre 0% y 100% (0.0,1.0)'
+        ],
+
         
     ],
 
